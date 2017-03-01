@@ -1,0 +1,101 @@
+package sunjc.materialdesigntest.heartRate;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+/**
+ * this view draws plot figure
+ * Author: SunJc
+ * in SG and NUS
+ * Date: Aug. 2015
+ * helps to display the signal processing result
+ */
+public class FigureDisp extends SurfaceView implements SurfaceHolder.Callback{
+
+    final static int margin = 50;
+    int mWidth;
+    int mHeight;
+    double[] vals;
+    int length;
+
+    SurfaceHolder mDrawSurface;
+
+    public FigureDisp(Context context) {
+        super(context);
+        initSurface(context);
+    }
+
+    public FigureDisp(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initSurface(context);
+    }
+
+    private void initSurface(Context context) {
+        mDrawSurface = getHolder();
+        mDrawSurface.addCallback(this);
+
+    }
+
+    // Region  these are from SurfaceHodler.CallBack
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        //Log.i("MyDebug", "Surface:Created");
+        setWillNotDraw(false);
+        // setBackgroundColor(Color.GRAY);
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width,
+                               int height) {
+        //Log.i("MyDebug", "Surface:" + width + "x" + height);
+        mWidth = width-2*margin;
+        mHeight = height-2*margin;
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+
+    }
+    // EndRegion
+
+    private int mColor = Color.BLACK;
+
+    void set(double[] data,int color){
+        vals = data;
+        length = data.length;
+        mColor = color;
+    }
+
+    @Override
+    protected void onDraw(Canvas c) {
+
+        Paint paint = new Paint();
+        paint.setColor(mColor);////////////////////////////////////////////////////////////////////////////在此处修改
+        paint.setStrokeWidth(5);
+
+        double maxVal = -10000;
+        double minVal = 100000000;
+        for(int i=0;i<length;i++){
+            if(vals[i]>maxVal)
+                maxVal = vals[i];
+            if(vals[i]<minVal)
+                minVal = vals[i];
+        }
+
+        double xstep = mWidth/(length-1);
+        double ystep = mHeight/(maxVal-minVal);
+
+        for(int i=1;i<length;i++){
+            int x1 = (int)(xstep * i) + margin;
+            int y1 = margin + mHeight - (int) Math.floor(ystep * (vals[i] - minVal));
+            int x2 = (int)(xstep * (i - 1)) + margin;
+            int y2 =  margin + mHeight - (int) Math.floor(ystep * (vals[i - 1] - minVal));
+            c.drawLine(x1,y1 ,x2 ,y2, paint);
+        }
+    }
+}

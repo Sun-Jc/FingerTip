@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:id="@+id/appThum"
+        android:background="@drawable/bg" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/leftMenuListView"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_below="@+id/appThum"
+        android:divider="@android:color/transparent"
+        android:layout_above="@+id/exitButton"/>
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="#000000"
+        android:singleLine="false"
+        android:text="Exit"
+        android:elegantTextHeight="true"
+        android:theme="@style/Theme.AppCompat.Light"
+        android:alpha="0.6" />
+</RelativeLayout>

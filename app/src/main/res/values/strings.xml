@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Fingertip</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="aboutus"> Xu Yuanyuan,\n
+                            Zhang Xi,\n
+                            Li Guoying \n
+                            Bao Junyi,\n
+                            Sun Jingchang.\n\n
+                            School of CS \@ SCU \n
+                            Chengdu, China\n
+                            2015
+    </string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
